@@ -1,0 +1,114 @@
+%% start of file `template.tex'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+\usepackage[absolute,overlay]{textpos}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xeCJK}
+\usepackage{zh_CN-Adobefonts_external} % Simplified Chinese Support using external fonts (./fonts/zh_CN-Adobe/)
+
+% moderncv themes
+% \moderncvstyle{banking}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
+% \moderncvcolor{black}                               % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
+\moderncvtheme[black]{banking}
+%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+% adjust the page margins
+\usepackage[scale=0.85,top=1cm,bottom=0cm]{geometry}
+\setlength{\footskip}{149.60005pt}                 % depending on the amount of information in the footer, you need to change this value. comment this line out and set it to the size given in the warning
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+
+\makeatletter
+\@ifpackageloaded{moderncvstylebanking}{%
+\let\oldmakecvtitle\makecvtitle
+\renewcommand*{\makecvtitle}{%
+  {\oldmakecvtitle}
+  \begin{textblock}{0}(13,0.2)
+  \includegraphics[width=\@photowidth]{\@photo}\par
+  \end{textblock}
+}%
+}{%
+}
+\makeatother
+
+% personal data
+\name{黄瑞哲}{}
+\address{北京市海淀区颐和园路5号北京大学}{}{}% optional, remove / comment the line if not wanted; the "postcode city" and "country" arguments can be omitted or provided empty
+\phone[mobile]{(+86)~188~1171~8053}                   % optional, remove / comment the line if not wanted; the optional "type" of the phone can be "mobile" (default), "fixed" or "fax"
+\email{jeshrz@foxmail.com}                               % optional, remove / comment the line if not wanted
+\social[github]{jesHrz}                              % optional, remove / comment the line if not wanted
+
+% replace with your OWN photo
+\photo[64pt][0.4pt]{profile.jpg}                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+%-----       resume       ---------------------------------------------------------
+\makecvtitle
+
+\vspace{-6.5ex}
+\section{教育背景}
+\cventry{2021.09 -- 至今}{计算机科学与技术，在读博士研究生}{北京大学}{北京}{}{北京大学高可信软件技术教育部重点实验室直博生，师从陈向群教授，预计2026年6月毕业}  % arguments 3 to 6 can be left empty
+\cventry{2017.09 -- 2021.06}{计算机科学与技术，工学学士}{山东大学}{青岛}{}{\textbf{GPA: 4.74/5.00, 专业排名: 1/162}. 国家奖学金. 学业奖学金 (3 次). 山东省普通高等学校优秀毕业生, 山东大学优秀毕业生.}  % arguments 3 to 6 can be left empty
+
+% \vspace{-1ex}
+\section{经历}
+\subsection{项目}
+\cventry{2021.11 -- 至今}{第一作者}{科研项目: NoDrop}{北京}{}{
+\begin{itemize}
+  \item 系统性的分析了当前溯源日志采集器所面临的超级生产者威胁并给出了相应的防御方案
+  \item 论文已投稿至 CCF-A 类会议 Security'23
+\end{itemize}}
+\cventry{2020.08 -- 2021.06}{创立人，开发者}{山东大学在线评测系统 | SDUOJ}{青岛}{}{
+\begin{itemize}
+    \item 「\href{https://github.com/SDUOJ}{山东大学在线评测系统}」是一款开源的 Online Judge，用于检测程序设计代码的正确性
+    \item SDUOJ 采用了微服务架构，项目包含基于 Vue.js 的前端、基于 Java SpringBoot 的后端以及基于 Docker 和 SECCOMP 的沙箱化评测机
+    \item SDUOJ 已经在山东大学计算机学院内部面向全体师生部署，承担各课程实验、课程考试、ACM训练、机式等需求
+\end{itemize}}
+
+\subsection{实习}
+\cventry{2023.01 -- 至今}{软件开发}{华为中央研究院 | HUAWEI}{北京}{}{
+\begin{itemize}
+    \item 优化云平台下虚拟机的物理内存调度策略，以满足在高内存压力环境下可以部署更多的虚拟机实例
+\end{itemize}}
+\cventry{2021.03 -- 2021.05}{物联网操作系统开发}{浙江省北大信息技术高等研究院 | AIIT}{杭州}{}{
+\begin{itemize}
+    \item 在物联网操作系统中实现系统镜像与应用程序的分离，实现应用程序可以单独在RTOS上引导运行，无需与系统镜像捆绑
+    \item 大部分嵌入式平台上没有配备MMU，应用和系统编译成一个二进制文件。通过分离应用与系统镜像，应用可以加载运行，增加了系统的安全性和可移植性
+\end{itemize}}
+\cventry{2020.02 -- 2020.06}{讲师}{程序设计思维与实践 | SDU}{青岛}{}{
+\begin{itemize}
+    \item 「\href{https://sddx.gaoxiaobang.com/\#/courses/detail/38711}{程序设计思维与实践}」是山东大学开设的一门本科生课程，阐述了利用程序设计解决具体问题中普遍意义的概念、经验、思维和方法
+    \item 讲授的课程覆盖了线性数据结构、图论以及字符串相关的算法知识与应用
+\end{itemize}}
+
+
+% \vspace{-1ex}
+\section{奖项荣誉}
+\cvlistitem{2019 年 ICPC 全国邀请赛（陕西）, \textbf{银奖}. \hfill 2019.05}
+\cvlistitem{第十届山东省大学生 ACM 程序设计竞赛, \textbf{银奖}. \hfill 2019.05}
+\cvlistitem{2019年深圳杯数学建模挑战赛, \textbf{二等奖}. \hfill 2019.08}
+\cvlistitem{第 43 届 ICPC 亚洲区域赛（徐州）, \textbf{铜奖}. \hfill 2019.11}
+\cvlistitem{第八届泰迪杯数据挖掘挑战赛, \textbf{二等奖}. \hfill 2020.06}
+
+% \vspace{-1ex}
+\section{技术能力}
+\cvitemwithcomment{编程语言}{C/C++, Rust, Python, CCF-CSP (300分).}{}
+\cvitemwithcomment{操作系统}{Linux, Docker, Git}{}
+\cvitemwithcomment{自然语言}{CET-4 (501分), CET-6 (490分)}{}
+
+\hfill\footnotesize\slshape{Last updated: \today}%
+\clearpage
+
+\end{document}
+
+
+%% end of file `template.tex'.

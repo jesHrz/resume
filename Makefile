@@ -4,22 +4,17 @@ PDFS = $(SRC:.tex=.pdf)
 
 all:	clean pdf
 
-en:	clean xelatex resume.tex
-
-zh_CN:	clean xelatex resume-zh_CN.tex
+en:	clean
+	xelatex resume-en.tex
+	
+zh:	clean
+	xelatex resume-zh.tex
 
 pdf:	clean $(PDFS)
 
 %.pdf:  %.tex
 	xelatex $<
 
-ifeq ($(OS),Windows_NT)
-  # on Windows
-  RM = cmd //C del
-else
-  # on Unix/Linux
-  RM = rm -f
-endif
-
+.PHONY: clean
 clean:
-	$(RM) *.log *.aux *.bbl *.blg *.synctex.gz *.out *.toc *.lof *.idx *.ilg *.ind *.pdf
+	rm -f *.log *.aux *.bbl *.blg *.synctex.gz *.out *.toc *.lof *.idx *.ilg *.ind *.pdf
