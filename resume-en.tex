@@ -5,7 +5,6 @@
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
 
-
 \documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 \usepackage[absolute,overlay]{textpos}
 
@@ -20,10 +19,20 @@
 \setlength{\footskip}{149.60005pt}                 % depending on the amount of information in the footer, you need to change this value. comment this line out and set it to the size given in the warning
 %\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
 
+% define a command to place a "floating text box"
+\usepackage[pscoord]{eso-pic}% The zero point of the coordinate systemis the lower left corner of the page (the default).
+\newcommand{\placetextbox}[3]{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \setbox0=\hbox{#3}% Put <stuff> in a box
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(\LenToUnit{#1\paperwidth},\LenToUnit{#2\paperheight}){\vtop{{\null}\makebox[0pt][c]{#3}}}%
+  }%
+}%
+
 \makeatletter
 \@ifpackageloaded{moderncvstylebanking}{%
 \let\oldmakecvtitle\makecvtitle
 \renewcommand*{\makecvtitle}{%
+  \placetextbox{0.82}{0.89}{\footnotesize\textit{Last updated: \today}}
   {\oldmakecvtitle}
   \begin{textblock}{0}(13,0.2)
   \includegraphics[width=\@photowidth]{\@photo}\par
@@ -59,33 +68,33 @@
 % \vspace{-1ex}
 \section{EXPERIENCE}
 \subsection{Projects}
-\cventry{Nov, 2021 -- Now}{First Author}{Research Project: NoDrop}{Beijing, China}{paper in submission}{
+  \cventry{Nov, 2021 -- Now}{First Author}{Research Project: NoDrop}{Beijing, China}{paper in submission}{
 \begin{itemize}
-    \item Systematically analyzed the super producer threat to provenance collectors and proposed a novel design for its mitigation.
-    \item Paper has been submitted to \textit{Security'23}.
+  \item Systematically analyzed the super producer threat to provenance collectors and proposed a novel design for its mitigation.
+  \item NoDrop deploys the conception of \textit{threadlet} to insert a snippet of codes to a thread as a provenance collector, which can realize the resource isolation from other threads and prevent super producer threat.
 \end{itemize}}
 \cventry{Sept, 2020 -- Jun, 2021}{Founder \& Developer}{\underline{S}han\underline{D}ong \underline{U}niversity \underline{O}nline \underline{J}udge | SDUOJ}{Qingdao, China}{}{
 \begin{itemize}
-    \item \href{https://github.com/SDUOJ}{SDUOJ} is an open-sourced online judge to check the correctness of the submitted code.
-    \item SDUOJ adopts a microservice architecture. It contains the disaggregated the GUI frontend (driven by Vue.js), the server backends (driven by Java SpringBoot) and the sandboxed judgers (driven by Docker and SECCOMP).
-    \item SDUOJ has been deploied within the School of Computer Science, Shandong University for the use of course examination, ACM training and computer tests.
+  \item \href{https://github.com/SDUOJ}{SDUOJ} is an open-sourced online judge to check the correctness of the submitted code.
+  \item SDUOJ adopts a microservice architecture. It contains the disaggregated the GUI frontend (driven by Vue.js), the server backends (driven by Java SpringBoot) and the sandboxed judgers (driven by Docker and SECCOMP).
+  \item SDUOJ has been deploied within the School of Computer Science, Shandong University for the use of course examination, ACM training and computer tests.
 \end{itemize}}
 
 \subsection{Internships}
-\cventry{Jan, 2023 -- Now}{Software Engineering}{HUAWEI Central Software Insititute}{Beijing, China}{}{
+\cventry{Jan, 2023 -- Now}{Software Engineering}{HUAWEI Poincare Laboratory, Central Software Insititute}{Beijing, China}{}{
 \begin{itemize}
-    \item Optimize physical memory scheduling policies of virtual machines under cloud platform. 
-    \item Ensure that more virtual machine instances can be deploied under high memory pressure.
+  \item Optimize physical memory scheduling policies of virtual machines under cloud platform. 
+  \item Ensure that more virtual machine instances can be deploied under high memory pressure.
 \end{itemize}}
 \cventry{Mar, 2021 -- May, 2021}{IoT Operating System Engineering}{Advanced Institute of Information Technology, Peking University}{Hangzhou, China}{}{
 \begin{itemize}
-    \item Split application binary from RTOS image to improve security and portability of RTOS.
-    \item Applications can be independely booted and launched as normal application in Linux.
+  \item Split application binary from RTOS image to improve security and portability of RTOS.
+  \item Applications can be independely booted and launched as normal application in Linux.
 \end{itemize}}
 \cventry{Feb, 2020 -- Jun, 2020}{Lecturer}{\textit{Programming Thinking and Practices}, Shandong University}{Qingdao, China}{}{
 \begin{itemize}
-    \item \href{https://sddx.gaoxiaobang.com/\#/courses/detail/38711}{\textit{Programming Thinking and Practices}} is a course for undergraduates in Shandong University, which expounds the concepts, experience, thinking and methods of general significance in solving practical problems by programming.%\href{https://sddx.gaoxiaobang.com/#/courses/detail/38711}{\textit{Programming Thinking and Practices}} expounds the concepts, experience, thinking and methods of general significance in solving specific problems by using programming.
-    \item Lectures include algorithems plus practices about linear data structure, graph theory and string.
+  \item \href{https://sddx.gaoxiaobang.com/\#/courses/detail/38711}{\textit{Programming Thinking and Practices}} is a course for undergraduates in Shandong University, which expounds the concepts, experience, thinking and methods of general significance in solving practical problems by programming.%\href{https://sddx.gaoxiaobang.com/#/courses/detail/38711}{\textit{Programming Thinking and Practices}} expounds the concepts, experience, thinking and methods of general significance in solving specific problems by using programming.
+  \item Lectures include algorithems plus practices about linear data structure, graph theory and string.
 \end{itemize}}
 
 
@@ -103,7 +112,6 @@
 \cvitemwithcomment{Operating Systems}{Linux, Docker, Git}{}
 \cvitemwithcomment{Languages}{CET-4 (501 points), CET-6 (490 points)}{}
 
-\hfill\footnotesize\slshape{Last updated: \today}%
 \clearpage
 
 %\clearpage\end{CJK*}                              % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined

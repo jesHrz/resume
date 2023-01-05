@@ -24,10 +24,20 @@
 \setlength{\footskip}{149.60005pt}                 % depending on the amount of information in the footer, you need to change this value. comment this line out and set it to the size given in the warning
 %\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
 
+% define a command to place a "floating text box"
+\usepackage[pscoord]{eso-pic}% The zero point of the coordinate systemis the lower left corner of the page (the default).
+\newcommand{\placetextbox}[3]{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \setbox0=\hbox{#3}% Put <stuff> in a box
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(\LenToUnit{#1\paperwidth},\LenToUnit{#2\paperheight}){\vtop{{\null}\makebox[0pt][c]{#3}}}%
+  }%
+}%
+
 \makeatletter
 \@ifpackageloaded{moderncvstylebanking}{%
 \let\oldmakecvtitle\makecvtitle
 \renewcommand*{\makecvtitle}{%
+  \placetextbox{0.82}{0.89}{\footnotesize\textit{Last updated: \today}}
   {\oldmakecvtitle}
   \begin{textblock}{0}(13,0.2)
   \includegraphics[width=\@photowidth]{\@photo}\par
@@ -62,20 +72,20 @@
 % \vspace{-1ex}
 \section{经历}
 \subsection{项目}
-\cventry{2021.11 -- 至今}{第一作者}{科研项目: NoDrop}{北京}{}{
+\cventry{2021.11 -- 至今}{第一作者}{科研项目: NoDrop}{北京}{论文投稿至\textit{Security'23}}{
 \begin{itemize}
-  \item 系统性的分析了当前溯源日志采集器所面临的超级生产者威胁并给出了相应的防御方案
-  \item 论文已投稿至 CCF-A 类会议 Security'23
+  \item 系统地分析了当前溯源日志采集器所面临的超级生产者威胁并给出了相应的防御方案
+  \item NoDrop 采用了 \textit{threadlet} 的思想将溯源日志采集器作为代码片段插入到线程的地址空间中来实现日志采集器与其他线程之间的资源隔离，从而能够防御超级生产者攻击
 \end{itemize}}
 \cventry{2020.08 -- 2021.06}{创立人，开发者}{山东大学在线评测系统 | SDUOJ}{青岛}{}{
 \begin{itemize}
     \item 「\href{https://github.com/SDUOJ}{山东大学在线评测系统}」是一款开源的 Online Judge，用于检测程序设计代码的正确性
     \item SDUOJ 采用了微服务架构，项目包含基于 Vue.js 的前端、基于 Java SpringBoot 的后端以及基于 Docker 和 SECCOMP 的沙箱化评测机
-    \item SDUOJ 已经在山东大学计算机学院内部面向全体师生部署，承担各课程实验、课程考试、ACM训练、机式等需求
+    \item SDUOJ 已经在山东大学计算机学院内部面向全体师生部署，承担课程实验、考试、ACM训练、上机测试等需求
 \end{itemize}}
 
 \subsection{实习}
-\cventry{2023.01 -- 至今}{软件开发}{华为中央研究院 | HUAWEI}{北京}{}{
+\cventry{2023.01 -- 至今}{软件开发}{华为中央软件研究院庞加莱实验室 | HUAWEI}{北京}{}{
 \begin{itemize}
     \item 优化云平台下虚拟机的物理内存调度策略，以满足在高内存压力环境下可以部署更多的虚拟机实例
 \end{itemize}}
@@ -105,7 +115,6 @@
 \cvitemwithcomment{操作系统}{Linux, Docker, Git}{}
 \cvitemwithcomment{自然语言}{CET-4 (501分), CET-6 (490分)}{}
 
-\hfill\footnotesize\slshape{Last updated: \today}%
 \clearpage
 
 \end{document}
